@@ -6,7 +6,7 @@ from .views import (
 
 app_name = 'authentication'
 urlpatterns = [
-    path('users/register/', RegistrationAPIView.as_view()),
-    path('users/login/', LoginAPIView.as_view()),
-    path('user/view/', UserRetrieveUpdateAPIView.as_view()),
+    path('Users/register/', RegistrationAPIView.as_view()),
+    path('Users/login/', LoginAPIView.as_view()),
+    path('Users/view/', UserRetrieveUpdateAPIView.as_view()),
 ]

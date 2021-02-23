@@ -116,7 +116,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-         fields = (
+        fields = (
             'email', 'username', 'password', 'token', 'profile', 'bio',
             'image',
         )
@@ -141,9 +141,9 @@ class UserSerializer(serializers.ModelSerializer):
         # `validated_data` dictionary before iterating over it.
         password = validated_data.pop('password', None)
 
-    # Like passwords, we have to handle profiles separately. To do that,
-    # we remove the profile data from the `validated_data` dictionary.
-    profile_data = validated_data.pop('profile', {})
+        # Like passwords, we have to handle profiles separately. To do that,
+        # we remove the profile data from the `validated_data` dictionary.
+        profile_data = validated_data.pop('profile', {})
 
         for (key, value) in validated_data.items():
             # For the keys remaining in `validated_data`, we will set them on
@@ -151,21 +151,21 @@ class UserSerializer(serializers.ModelSerializer):
             setattr(instance, key, value)
 
         if password is not None:
-            # `.set_password()`  handles all
-            # of the security stuff that we shouldn't be concerned with.
+        # `.set_password()`  handles all
+        # of the security stuff that we shouldn't be concerned with.
             instance.set_password(password)
 
-        # After everything has been updated we must explicitly save
-        # the model. It's worth pointing out that `.set_password()` does not
-        # save the model.
-        instance.save()
+            # After everything has been updated we must explicitly save
+            # the model. It's worth pointing out that `.set_password()` does not
+            # save the model.
+            instance.save()
 
-    for (key, value) in profile_data.items():
-        # We're doing the same thing as above, but this time we're making
-        # changes to the Profile model.
-        setattr(instance.profile, key, value)
+        for (key, value) in profile_data.items():
+            # We're doing the same thing as above, but this time we're making
+            # changes to the Profile model.
+            setattr(instance.profile, key, value)
 
-    # Save the profile just like we saved the user.
-    instance.profile.save()
+            # Save the profile just like we saved the user.
+            instance.profile.save()
 
         return instance

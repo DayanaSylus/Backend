@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'rest_framework',
+    'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+   'drf_yasg',
 
     'conduit.apps.articles',
     'conduit.apps.authentication',
